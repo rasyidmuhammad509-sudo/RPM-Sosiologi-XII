@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPM Sosiologi XII - Globalisasi & Modernisasi</title>
+<style>
+:root{
+  --green:#087f5b; --green2:#0ca678; --mint:#e8f7f1; --dark:#15352d;
+  --text:#20332e; --muted:#64756f; --line:#dce9e4; --white:#fff;
+  --shadow:0 12px 35px rgba(20,70,55,.10);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f4f8f6;color:var(--text);line-height:1.65}
+button{font:inherit}
+.hero{background:linear-gradient(135deg,#075e46,#0ca678);color:white;padding:42px 24px}
+.hero-inner{max-width:1120px;margin:auto}
+.badge{display:inline-block;padding:6px 12px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(255,255,255,.12);font-size:13px}
+h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:14px 0 10px}
+.hero p{max-width:760px;margin:0;color:#e9fff7}
+.layout{max-width:1120px;margin:24px auto;display:grid;grid-template-columns:245px 1fr;gap:22px;padding:0 18px}
+nav{position:sticky;top:18px;height:max-content;background:white;border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:var(--shadow)}
+nav button{width:100%;text-align:left;border:0;background:transparent;padding:11px 12px;border-radius:11px;color:var(--text);cursor:pointer}
+nav button:hover,nav button.active{background:var(--mint);color:var(--green);font-weight:700}
+main{min-width:0}
+.panel{display:none;background:white;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow);animation:fade .25s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
+h2{color:var(--green);margin-top:0;font-size:28px}
+h3{color:var(--dark);margin-bottom:7px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:15px;padding:18px;background:#fbfdfc}
+.card strong{display:block;color:var(--green);font-size:17px;margin-bottom:6px}
+.kpi{background:var(--mint);border-left:4px solid var(--green);padding:15px 18px;border-radius:10px;margin:14px 0}
+.steps{display:grid;gap:12px}
+.step{display:flex;gap:15px;border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;background:#fff}
+.step:hover{background:#f8fcfa}
+.num{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800}
+.details{display:none;margin-top:8px;color:var(--muted)}
+.step.open .details{display:block}
+table{width:100%;border-collapse:collapse;margin-top:15px;font-size:14px}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+th{background:var(--mint);color:var(--green)}
+.tag{display:inline-block;padding:4px 9px;border-radius:999px;background:var(--mint);color:var(--green);font-size:12px;font-weight:700;margin:3px}
+.quote{font-size:18px;font-weight:650;color:var(--dark);background:#f7fbf9;padding:18px;border-radius:14px;border-left:5px solid var(--green)}
+.footer{max-width:1120px;margin:20px auto 40px;padding:0 18px;color:var(--muted);font-size:13px}
+@media(max-width:800px){
+ .layout{grid-template-columns:1fr}
+ nav{position:relative;top:auto;display:flex;overflow:auto;gap:5px}
+ nav button{white-space:nowrap;width:auto}
+ .panel{padding:20px}
+ table{display:block;overflow:auto}
+}
+</style>
+
+<style>
+/* =========================================================
+   TAMPILAN CETAK / SIMPAN SEBAGAI PDF
+   Tidak mengubah tampilan interaktif saat dibuka di browser.
+   ========================================================= */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 13mm 15mm 13mm;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #20332e !important;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  .hero {
+    padding: 18px 0 14px !important;
+    background: #087f5b !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .hero-inner {
+    max-width: none !important;
+  }
+
+  .hero h1 {
+    font-size: 27px !important;
+    margin: 8px 0 5px !important;
+  }
+
+  .hero p {
+    max-width: none !important;
+    font-size: 10.5pt;
+  }
+
+  .layout {
+    display: block !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  nav {
+    display: none !important;
+  }
+
+  main {
+    width: 100% !important;
+  }
+
+  /* Saat dicetak, SEMUA bagian RPM ditampilkan,
+     bukan hanya menu yang sedang aktif. */
+  .panel,
+  .panel.active {
+    display: block !important;
+    margin: 0 !important;
+    padding: 17px 2px 8px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+
+  .panel + .panel {
+    border-top: 1px solid #dce9e4 !important;
+    padding-top: 18px !important;
+  }
+
+  h2 {
+    font-size: 17px !important;
+    margin: 0 0 9px !important;
+    color: #087f5b !important;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .card {
+    padding: 11px !important;
+    border: 1px solid #dce9e4 !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .card strong {
+    font-size: 12.5pt !important;
+    margin-bottom: 3px !important;
+  }
+
+  .kpi, .quote {
+    padding: 10px 12px !important;
+    margin: 9px 0 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    background: #e8f7f1 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .steps {
+    gap: 7px !important;
+  }
+
+  .step {
+    padding: 10px !important;
+    gap: 10px !important;
+    cursor: default !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .num {
+    width: 28px !important;
+    height: 28px !important;
+    flex-basis: 28px !important;
+    font-size: 11px !important;
+  }
+
+  /* Pada PDF semua uraian langkah ditampilkan,
+     walaupun di layar masih bersifat klik-buka. */
+  .details,
+  .step.open .details {
+    display: block !important;
+    margin-top: 4px !important;
+    color: #20332e !important;
+  }
+
+  table {
+    font-size: 9pt !important;
+    margin-top: 9px !important;
+    break-inside: auto;
+  }
+
+  tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    padding: 7px !important;
+  }
+
+  th {
+    background: #e8f7f1 !important;
+    color: #087f5b !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  ul {
+    margin-top: 5px;
+    margin-bottom: 8px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .tag {
+    padding: 3px 7px !important;
+    margin: 2px !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .footer {
+    max-width: none !important;
+    margin: 12px 0 0 !important;
+    padding: 10px 0 0 !important;
+    border-top: 1px solid #dce9e4;
+    font-size: 8.5pt !important;
+  }
+
+  .footer button {
+    display: none !important;
+  }
+
+  /* Hindari judul terpisah dari isi berikutnya. */
+  .panel > h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <span class="badge">Rancangan Pembelajaran Mendalam</span>
+    <h1>Sosiologi Kelas XII</h1>
+    <p><b>Globalisasi & Modernisasi</b> — pembelajaran berbasis masalah, kajian kasus, diskusi kolaboratif, dan game edukatif interaktif menggunakan Papan Interaktif Digital (PID).</p>
+  </div>
+</header>
+
+<div class="layout">
+<nav aria-label="Navigasi RPM">
+  <button class="active" data-target="identitas">01 Identitas</button>
+  <button data-target="profil">02 Profil Lulusan</button>
+  <button data-target="tujuan">03 Tujuan</button>
+  <button data-target="pedagogis">04 Pedagogis</button>
+  <button data-target="kemitraan">05 Kemitraan</button>
+  <button data-target="lingkungan">06 Lingkungan</button>
+  <button data-target="digital">07 Digital</button>
+  <button data-target="lintas">08 Lintas Disiplin</button>
+  <button data-target="pengalaman">09 Pengalaman Belajar</button>
+  <button data-target="asesmen">10 Asesmen</button>
+  <button data-target="rubrik">11 Rubrik</button>
+</nav>
+
+<main>
+<section id="identitas" class="panel active">
+<h2>Identitas Sekolah</h2>
+<div class="grid">
+<div class="card"><strong>Satuan Pendidikan</strong>SMAN 1 Salam Babaris</div>
+<div class="card"><strong>Guru</strong>M. Rasyid, S.Pd.</div>
+<div class="card"><strong>Mata Pelajaran</strong>Sosiologi</div>
+<div class="card"><strong>Fase / Kelas</strong>F / XII</div>
+<div class="card"><strong>Materi</strong>Globalisasi dan Modernisasi</div>
+<div class="card"><strong>Model</strong>Problem Based Learning (PBL)</div>
+<div class="card"><strong>Pendekatan</strong>Pembelajaran Mendalam</div>
+</div>
+<div class="kpi"><b>Media utama:</b> Papan Interaktif Digital (PID), game edukatif, bahan tayang, sumber belajar digital/cetak.</div>
+</section>
+
+<section id="profil" class="panel">
+<h2>Dimensi Profil Lulusan</h2>
+<div class="grid">
+<div class="card"><strong>Penalaran Kritis</strong>Menganalisis dan mengevaluasi fenomena globalisasi berdasarkan fakta, informasi, dan bukti.</div>
+<div class="card"><strong>Kewargaan</strong>Menyikapi perubahan global dengan tetap menghargai nilai sosial, budaya, dan identitas bangsa.</div>
+<div class="card"><strong>Kolaborasi</strong>Bekerja sama, berbagi tugas, berdiskusi, dan mengambil keputusan bersama.</div>
+<div class="card"><strong>Komunikasi</strong>Menyampaikan gagasan, argumentasi, dan tanggapan secara jelas dan santun.</div>
+<div class="card"><strong>Kreativitas</strong>Menghasilkan gagasan atau solusi terhadap persoalan akibat globalisasi dan modernisasi.</div>
+</div>
+</section>
+
+<section id="tujuan" class="panel">
+<h2>Tujuan Pembelajaran</h2>
+<div class="steps">
+<div class="step"><div class="num">1</div><div><b>Menganalisis</b><div class="details">Murid mampu menganalisis hubungan globalisasi dan modernisasi dengan perubahan sosial berdasarkan fenomena kehidupan sehari-hari.</div></div></div>
+<div class="step"><div class="num">2</div><div><b>Mengevaluasi</b><div class="details">Murid mampu mengevaluasi dampak positif dan negatif globalisasi dan modernisasi terhadap kehidupan sosial, budaya, ekonomi, dan perilaku masyarakat berdasarkan kajian kasus dengan argumentasi logis dan berbasis bukti.</div></div></div>
+<div class="step"><div class="num">3</div><div><b>Merancang dan mengomunikasikan</b><div class="details">Murid mampu merancang dan mengomunikasikan solusi kreatif terhadap dampak negatif globalisasi dan modernisasi dengan tetap mempertahankan nilai sosial dan budaya lokal.</div></div></div>
+</div>
+</section>
+
+<section id="pedagogis" class="panel">
+<h2>Praktik Pedagogis</h2>
+<p><span class="tag">PBL</span><span class="tag">Mindful</span><span class="tag">Meaningful</span><span class="tag">Joyful</span></p>
+<div class="steps">
+<div class="step"><div class="num">1</div><div><b>Orientasi masalah</b><div class="details">Guru menghadirkan fenomena nyata melalui gambar, video, berita, atau kasus sosial.</div></div></div>
+<div class="step"><div class="num">2</div><div><b>Organisasi kelompok</b><div class="details">Murid dibagi dalam kelompok dan menentukan fokus permasalahan.</div></div></div>
+<div class="step"><div class="num">3</div><div><b>Investigasi</b><div class="details">Murid mencari informasi, mengidentifikasi fakta, penyebab, serta dampak sosial, budaya, ekonomi, dan perilaku.</div></div></div>
+<div class="step"><div class="num">4</div><div><b>Game edukatif PID</b><div class="details">Murid menjawab soal berbasis kasus. Setelah jawaban, guru melakukan debriefing: “Mengapa jawaban itu paling tepat?” dan “Bukti apa yang mendukungnya?”</div></div></div>
+<div class="step"><div class="num">5</div><div><b>Presentasi dan argumentasi</b><div class="details">Kelompok menyampaikan hasil kajian dan mempertahankan pendapat berdasarkan bukti.</div></div></div>
+<div class="step"><div class="num">6</div><div><b>Refleksi</b><div class="details">Murid merefleksikan sikap yang tepat dalam menghadapi globalisasi dan modernisasi.</div></div></div>
+</div>
+</section>
+
+<section id="kemitraan" class="panel">
+<h2>Kemitraan Pembelajaran</h2>
+<div class="grid">
+<div class="card"><strong>Guru</strong>Fasilitator, pengarah, pemberi umpan balik, dan pengelola game.</div>
+<div class="card"><strong>Murid</strong>Pembelajar aktif yang mengamati, menganalisis, berdiskusi, mengambil keputusan, dan merefleksi.</div>
+<div class="card"><strong>Teman Sebaya</strong>Saling memberikan pendapat, tanggapan, dan umpan balik.</div>
+<div class="card"><strong>Lingkungan</strong>Fenomena sekolah dan masyarakat menjadi sumber belajar kontekstual.</div>
+</div>
+</section>
+
+<section id="lingkungan" class="panel">
+<h2>Lingkungan Pembelajaran</h2>
+<ul>
+<li>Aman dan nyaman untuk menyampaikan pendapat.</li>
+<li>Mendorong murid bertanya dan berpikir kritis.</li>
+<li>Menghargai perbedaan pendapat.</li>
+<li>Mendorong kerja sama dan partisipasi aktif.</li>
+<li>Memanfaatkan ruang kelas dan PID sebagai ruang belajar interaktif.</li>
+</ul>
+<div class="kpi"><b>Saran pengaturan:</b> tempat duduk berkelompok agar diskusi dan kolaborasi lebih mudah dilakukan.</div>
+</section>
+
+<section id="digital" class="panel">
+<h2>Pemanfaatan Teknologi Digital</h2>
+<div class="grid">
+<div class="card"><strong>PID</strong>Media utama untuk kasus, pertanyaan, visual, dan permainan.</div>
+<div class="card"><strong>Game Edukatif</strong>Sarana penguatan dan asesmen formatif berbasis kasus.</div>
+<div class="card"><strong>Sumber Digital</strong>Mencari dan membandingkan informasi tentang fenomena globalisasi.</div>
+<div class="card"><strong>Media Visual</strong>Video/gambar untuk menghadirkan fenomena sosial yang kontekstual.</div>
+<div class="card"><strong>Karya Digital</strong>Alternatif produk solusi yang dibuat murid.</div>
+</div>
+<div class="quote">Game bukan sekadar hiburan. Pertanyaan dirancang untuk mendorong analisis, evaluasi, pengambilan keputusan, dan argumentasi.</div>
+</section>
+
+<section id="lintas" class="panel">
+<h2>Lintas Disiplin Ilmu</h2>
+<table>
+<tr><th>Disiplin</th><th>Keterkaitan</th></tr>
+<tr><td>Ekonomi</td><td>Perdagangan global, ekonomi digital, konsumsi, dan perubahan pekerjaan.</td></tr>
+<tr><td>Geografi</td><td>Keterhubungan antarwilayah dan penyebaran teknologi serta budaya.</td></tr>
+<tr><td>Informatika</td><td>Teknologi digital, media sosial, dan perubahan pola interaksi.</td></tr>
+<tr><td>Pendidikan Pancasila</td><td>Identitas nasional, nilai Pancasila, kewargaan, dan tanggung jawab.</td></tr>
+<tr><td>Bahasa Indonesia</td><td>Membaca kritis, menyusun argumentasi, presentasi, dan komunikasi.</td></tr>
+</table>
+</section>
+
+<section id="pengalaman" class="panel">
+<h2>Pengalaman Belajar</h2>
+<div class="steps">
+<div class="step"><div class="num">A</div><div><b>Awal — Berkesadaran</b><div class="details">Apersepsi dengan fenomena dekat dengan murid. Pertanyaan pemantik: <i>“Apakah semua perubahan akibat globalisasi dan modernisasi dapat disebut sebagai kemajuan?”</i> Guru menyampaikan tujuan dan mekanisme pembelajaran.</div></div></div>
+<div class="step"><div class="num">I</div><div><b>Inti — Memahami</b><div class="details">Murid mengamati kasus, mengidentifikasi bentuk globalisasi/modernisasi, faktor penyebab, perubahan, dan pihak yang terdampak.</div></div></div>
+<div class="step"><div class="num">II</div><div><b>Inti — Mengaplikasikan</b><div class="details">Kelompok mengkaji dampak terhadap sosial, budaya, ekonomi, dan perilaku; membedakan dampak positif/negatif serta mencantumkan bukti.</div></div></div>
+<div class="step"><div class="num">III</div><div><b>Inti — Game PID</b><div class="details">Kelompok mengikuti battle edukatif. Soal berbasis kasus. Setelah jawaban, guru melakukan debriefing untuk menggali alasan dan bukti.</div></div></div>
+<div class="step"><div class="num">IV</div><div><b>Inti — Mengevaluasi & Mengomunikasikan</b><div class="details">Murid mengevaluasi dampak, menentukan sikap, mempresentasikan hasil, dan menanggapi kelompok lain.</div></div></div>
+<div class="step"><div class="num">P</div><div><b>Penutup — Refleksi</b><div class="details">Murid menjawab: “Apa pemahaman baru saya?”, “Apa dampak yang paling dekat?”, dan “Bagaimana seharusnya saya bersikap?”</div></div></div>
+</div>
+</section>
+
+<section id="asesmen" class="panel">
+<h2>Asesmen Pembelajaran</h2>
+<div class="grid">
+<div class="card"><strong>Diagnostik</strong>Pertanyaan pemantik dan respons awal untuk mengetahui pengetahuan awal.</div>
+<div class="card"><strong>Formatif</strong>Observasi diskusi, analisis kasus, kolaborasi, argumentasi, respons game, tanya jawab, dan presentasi.</div>
+<div class="card"><strong>Sumatif</strong>Hasil evaluasi kasus dan solusi yang ditawarkan kelompok.</div>
+</div>
+<div class="kpi"><b>Catatan:</b> skor game PID berfungsi sebagai penguatan motivasi dan asesmen formatif, bukan satu-satunya dasar nilai akhir.</div>
+<h3>Komponen penilaian</h3>
+<p><span class="tag">Analisis</span><span class="tag">Evaluasi dampak</span><span class="tag">Bukti</span><span class="tag">Argumentasi</span><span class="tag">Solusi</span><span class="tag">Komunikasi</span></p>
+</section>
+
+<section id="rubrik" class="panel">
+<h2>Rubrik Penilaian Diskusi</h2>
+<table>
+<tr><th>Aspek</th><th>4 — Sangat Baik</th><th>3 — Baik</th><th>2 — Cukup</th><th>1 — Perlu Bimbingan</th></tr>
+<tr><td>Analisis Kasus</td><td>Mendalam, tepat, dan terhubung dengan konsep Sosiologi.</td><td>Tepat dan cukup jelas.</td><td>Terbatas/sebagian kurang tepat.</td><td>Belum mampu menganalisis dengan tepat.</td></tr>
+<tr><td>Evaluasi Dampak</td><td>Seimbang, mendalam, dan alasan kuat.</td><td>Cukup lengkap dengan alasan.</td><td>Dampak disebutkan, alasan lemah.</td><td>Belum mampu mengevaluasi.</td></tr>
+<tr><td>Penggunaan Bukti</td><td>Bukti relevan dan sangat mendukung argumen.</td><td>Bukti cukup relevan.</td><td>Bukti terbatas.</td><td>Tidak ada bukti relevan.</td></tr>
+<tr><td>Argumentasi</td><td>Logis, sistematis, dan mampu mempertahankan pendapat.</td><td>Logis dan cukup didukung alasan.</td><td>Masih umum.</td><td>Tidak jelas/tanpa alasan.</td></tr>
+<tr><td>Kolaborasi</td><td>Semua anggota aktif dan saling menghargai.</td><td>Sebagian besar aktif.</td><td>Hanya beberapa yang aktif.</td><td>Kerja sama belum terlihat.</td></tr>
+<tr><td>Komunikasi</td><td>Jelas, percaya diri, santun, dan mampu merespons.</td><td>Jelas dan cukup percaya diri.</td><td>Kurang sistematis/ragu-ragu.</td><td>Sulit menyampaikan gagasan.</td></tr>
+</table>
+<div class="kpi"><b>Skor maksimum:</b> 24 &nbsp; | &nbsp; <b>Nilai:</b> (Skor Perolehan ÷ 24) × 100</div>
+</section>
+</main>
+</div>
+
+<div class="footer">RPM Sosiologi Kelas XII • Globalisasi & Modernisasi • SMAN 1 Salam Babaris • Guru: M. Rasyid, S.Pd.<br><br><button onclick="window.print()" style="padding:10px 16px;border:0;border-radius:10px;background:#087f5b;color:white;cursor:pointer">🖨️ Cetak / Simpan sebagai PDF</button></div>
+
+<script>
+const buttons=document.querySelectorAll('nav button');
+const panels=document.querySelectorAll('.panel');
+buttons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    buttons.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.target).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+document.querySelectorAll('.step').forEach(step=>{
+  step.addEventListener('click',()=>step.classList.toggle('open'));
+});
+</script>
+</body>
+</html>
